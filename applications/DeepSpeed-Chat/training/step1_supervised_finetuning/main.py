@@ -21,6 +21,11 @@ import deepspeed
 from deepspeed.ops.adam import DeepSpeedCPUAdam, FusedAdam
 from deepspeed import get_accelerator
 
+import sys
+from pathlib import Path
+root = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(root))
+
 from dschat.utils.data.data_utils import create_prompt_dataset
 from dschat.utils.utils import print_rank_0, to_device, save_hf_format, set_random_seed, get_all_reduce_mean, get_optimizer_grouped_parameters, save_zero_three_model, load_hf_tokenizer
 from dschat.utils.ds_utils import get_train_ds_config

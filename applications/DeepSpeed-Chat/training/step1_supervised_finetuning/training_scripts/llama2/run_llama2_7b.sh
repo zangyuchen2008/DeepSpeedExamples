@@ -1,12 +1,8 @@
-#!/bin/bash
-# Copyright (c) Microsoft Corporation.
-# SPDX-License-Identifier: Apache-2.0
-
-# DeepSpeed Team
+# notice this script should be run under DeepSpeed-Chat/training/step1_supervised_fintuning/
 OUTPUT=$1
 ZERO_STAGE=$2
 if [ "$OUTPUT" == "" ]; then
-    OUTPUT=./output_step1_llama2_7b
+    OUTPUT=/data-ai/checkpoints/zangyuchen
 fi
 if [ "$ZERO_STAGE" == "" ]; then
     ZERO_STAGE=3
@@ -14,15 +10,14 @@ fi
 mkdir -p $OUTPUT
 
 deepspeed main.py \
-   --data_path Dahoas/rm-static Dahoas/full-hh-rlhf Dahoas/synthetic-instruct-gptj-pairwise yitingxie/rlhf-reward-datasets \
    --data_split 2,4,4 \
-   --model_name_or_path meta-llama/Llama-2-7b-hf \
+   --model_name_or_path /data-ai/model/llama2/llama2_hf/Llama-2-7b-hf \
    --per_device_train_batch_size 4 \
    --per_device_eval_batch_size 4 \
    --max_seq_len 512 \
    --learning_rate 9.65e-6 \
    --weight_decay 0. \
-   --num_train_epochs 4  \
+   --num_train_epochs 100000  \
    --gradient_accumulation_steps 1 \
    --lr_scheduler_type cosine \
    --num_warmup_steps 0 \
