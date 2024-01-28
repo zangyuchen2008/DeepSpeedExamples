@@ -1,4 +1,5 @@
 # notice this script should be run under DeepSpeed-Chat/training/step1_supervised_fintuning/
+# start running script: nohup bash training_scripts/llama2/run_llama2_7b.sh > /data-ai/checkpoints/zangyuchen/nohup.log  2>&1 &
 OUTPUT=$1
 ZERO_STAGE=$2
 if [ "$OUTPUT" == "" ]; then
@@ -8,6 +9,10 @@ if [ "$ZERO_STAGE" == "" ]; then
     ZERO_STAGE=3
 fi
 mkdir -p $OUTPUT
+
+# Set CUDA_VISIBLE_DEVICES to restrict GPU usage
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6
+
 
 deepspeed main.py \
    --data_split 2,4,4 \
