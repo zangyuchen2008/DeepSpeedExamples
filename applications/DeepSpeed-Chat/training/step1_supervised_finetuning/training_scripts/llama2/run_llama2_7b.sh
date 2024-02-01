@@ -15,7 +15,7 @@ mkdir -p $OUTPUT
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 
 
-deepspeed --include localhost:4,5,6,7 main.py \
+deepspeed --include localhost:4,5,6,7 --master_port 29600 main.py \
    --data_split 2,4,4 \
    --model_name_or_path /data-ai/model/llama2/llama2_hf/Llama-2-7b-hf \
    --per_device_train_batch_size 4 \
