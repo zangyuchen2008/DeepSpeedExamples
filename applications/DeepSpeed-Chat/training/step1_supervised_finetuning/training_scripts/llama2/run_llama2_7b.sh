@@ -1,4 +1,4 @@
-# notice this script should be run under DeepSpeed-Chat/training/step1_supervised_fintuning/
+# notice this script should be run under DeepSpeedExamples/applications/DeepSpeed-Chat/training/step1_supervised_finetuning
 # start running script: nohup bash training_scripts/llama2/run_llama2_7b.sh > /data-ai/checkpoints/zangyuchen/nohup.log  2>&1 &
 # using env: gpu
 OUTPUT=$1
